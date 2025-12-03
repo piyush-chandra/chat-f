@@ -23,7 +23,7 @@ export function ChatContainer() {
                 onLoadMore={loadMoreMessages}
             />
 
-            <MessageInput onSend={sendMessage} disabled={!isConnected} />
+            <MessageInput onSend={sendMessage} />
         </div>
     );
 }

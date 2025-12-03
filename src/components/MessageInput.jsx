@@ -5,7 +5,7 @@ export function MessageInput({ onSend, disabled }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (text.trim() && !disabled) {
+        if (text.trim()) {
             onSend(text);
             setText('');
         }
@@ -28,11 +28,10 @@ export function MessageInput({ onSend, disabled }) {
                     placeholder="Type a message..."
                     rows={3}
                     className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                    disabled={disabled}
                 />
                 <button
                     type="submit"
-                    disabled={disabled || !text.trim()}
+                    disabled={!text.trim()}
                     className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors h-full"
                 >
                     Send
