@@ -50,6 +50,7 @@ export function useChat() {
 
     const sendMessage = useCallback(async (text) => {
         try {
+            console.log('Sending message to:', `${API_URL}/api/messages`);
             const res = await fetch(`${API_URL}/api/messages`, {
                 method: 'POST',
                 headers: {
@@ -61,10 +62,16 @@ export function useChat() {
                 }),
             });
 
+            console.log('Send response status:', res.status);
             if (res.ok) {
                 const newMessage = await res.json();
+                console.log('Message sent successfully:', newMessage);
                 // Optimistically add the message to UI
                 setMessages(prev => [...prev, newMessage]);
+            } else {
+                console.error('Failed to send message, status:', res.status);
+                const errorText = await res.text();
+                console.error('Error response:', errorText);
             }
         } catch (err) {
             console.error("Failed to send message:", err);
