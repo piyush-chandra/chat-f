@@ -71,7 +71,7 @@ export function MessageList({ messages, clientId, onLoadMore }) {
                                 }`}
                         >
                             <div className="text-xs opacity-75 mb-1">{msg.sender}</div>
-                            <div>{msg.text}</div>
+                            <div className="prose prose-sm max-w-none break-words rich-text-content" dangerouslySetInnerHTML={{ __html: msg.text }} />
                         </div>
                     </div>
                 );

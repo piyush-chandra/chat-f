@@ -7,3 +7,43 @@ html, body, #root {
   margin: 0;
   overflow: hidden; /* Prevent body scroll, handle in ChatContainer */
 }
+
+.rich-text-content p {
+  margin-bottom: 0.5rem;
+}
+.rich-text-content p:last-child {
+  margin-bottom: 0;
+}
+.rich-text-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.rich-text-content ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.rich-text-content blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 1rem;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+.rich-text-content pre {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.5rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+.bg-blue-500 .rich-text-content blockquote {
+  border-left-color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+}
+.bg-blue-500 .rich-text-content pre {
+  background: rgba(0, 0, 0, 0.2);
+}
+.rich-text-content a {
+  text-decoration: underline;
+}
