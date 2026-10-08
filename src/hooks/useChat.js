@@ -6,6 +6,7 @@ export function useChat() {
     const [messages, setMessages] = useState([]);
     const [isConnected, setIsConnected] = useState(true); // Always "connected" in REST
     const [clientId] = useState(() => `User-${Math.floor(Math.random() * 1000)}`);
+    const [sendError, setSendError] = useState(null);
 
     // Fetch messages function
     const fetchMessages = useCallback(async () => {
@@ -49,6 +50,7 @@ export function useChat() {
     }, [fetchMessages]);
 
     const sendMessage = useCallback(async (text) => {
+        setSendError(null);
         try {
             console.log('Sending message to:', `${API_URL}/api/messages`);
             const res = await fetch(`${API_URL}/api/messages`, {
@@ -69,12 +71,13 @@ export function useChat() {
                 // Optimistically add the message to UI
                 setMessages(prev => [...prev, newMessage]);
             } else {
-                console.error('Failed to send message, status:', res.status);
-                const errorText = await res.text();
-                console.error('Error response:', errorText);
+                const errorText = await res.text().catch(() => "");
+                console.error('Failed to send message, status:', res.status, errorText);
+                setSendError(`Message not delivered (server ${res.status}). Check connection and retry.`);
             }
         } catch (err) {
             console.error("Failed to send message:", err);
+            setSendError("Message not delivered — server unreachable. Check connection and retry.");
         }
     }, [clientId]);
 
@@ -99,6 +102,7 @@ export function useChat() {
         isConnected,
         clientId,
         sendMessage,
+        sendError,
         loadMoreMessages
     };
 }

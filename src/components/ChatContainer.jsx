@@ -4,7 +4,7 @@ import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
 
 export function ChatContainer() {
-    const { messages, isConnected, clientId, sendMessage, loadMoreMessages } = useChat();
+    const { messages, isConnected, clientId, sendMessage, sendError, loadMoreMessages } = useChat();
 
     return (
         <div className="flex flex-col h-screen bg-gray-100">
@@ -23,6 +23,11 @@ export function ChatContainer() {
                 onLoadMore={loadMoreMessages}
             />
 
+            {sendError && (
+                <div role="alert" className="px-4 py-2 text-sm text-red-700 bg-red-100 border-t border-red-200">
+                    {sendError}
+                </div>
+            )}
             <MessageInput onSend={sendMessage} />
         </div>
     );
