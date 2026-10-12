@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://chat-b-topaz.vercel.app';
+const API_URL = import.meta.env.VITE_API_URL || 'https://chat-b.piyushchandra.workers.dev';
 
 export function useChat() {
     const [messages, setMessages] = useState([]);
